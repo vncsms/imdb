@@ -1,11 +1,14 @@
 import UGCModel from '../base/base';
 
 export default class UserModel extends UGCModel {
-
   username: string;
+
   name: string;
+
   lastname: string;
+
   email: string;
+
   password: string;
 
   constructor() {
@@ -17,7 +20,7 @@ export default class UserModel extends UGCModel {
     this.password = '';
   }
 
-  save() {
+  save(): void {
     super.save();
   }
 }
