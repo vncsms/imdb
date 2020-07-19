@@ -8,7 +8,7 @@ const mongoOptions = {
   useUnifiedTopology: true,
 };
 
-let db: Db | null = null;
+let db: Db;
 let dbSession: MongoClient | null = null;
 
 export const connect = async (): Promise<any> => {
@@ -35,6 +35,6 @@ export const disconnect = (): void => {
   }
 };
 
-export const getDB = (): Db | null => {
+export const getDB = (): Db => {
   return db;
 };

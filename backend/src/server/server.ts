@@ -8,7 +8,6 @@ const PORT = SERVER_PORT;
 
 app.use(express.json());
 app.use(routes);
-
 app.listen(PORT, async () => {
   console.log(`Listening to port ${PORT} ✅`);
   try {
