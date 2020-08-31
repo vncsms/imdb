@@ -1,7 +1,8 @@
-import router from 'express';
+import { Router } from 'express';
 import { getAllUsers } from './db';
+import { registertUser, makeLogin } from './views';
 
-const userRouter = router();
+const userRouter = Router();
 
 userRouter.get('/', (req, response) => {
   getAllUsers().then(res => {
@@ -10,9 +11,14 @@ userRouter.get('/', (req, response) => {
 });
 
 userRouter.post('/', (req, res) => {
-  console.log(req.body);
-  // res.send(user_id + ' ' + token + ' ' + geo);
-  res.send('POST request to the homepage');
+  const resp = registertUser(req.body);
+  res.status(resp.status).send(resp.body);
+});
+
+userRouter.post('/login', (req, res) => {
+  makeLogin(req.body).then(data => {
+    res.status(data.status).send(data.body);
+  });
 });
 
 export default userRouter;
