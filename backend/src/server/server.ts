@@ -1,28 +1,13 @@
 import express from 'express';
-
 import * as db from '../database/MongoHelper';
+import routes from './routes';
+import { SERVER_PORT } from '../imdb/settings';
 
 const app = express();
-const PORT = 3333;
+const PORT = SERVER_PORT;
 
-app.get('/users', () => {
-  console.log('teste');
-});
-
-app.get('/inventory', (req, res) => {
-  db.getDB()
-    ?.collection('inventory')
-    .find({})
-    .toArray((err, documents) => {
-      if (err) {
-        console.log('Something went wrong ⛔', err);
-        return {};
-      }
-      console.log(documents);
-      return res.json(documents);
-    });
-});
-
+app.use(express.json());
+app.use(routes);
 app.listen(PORT, async () => {
   console.log(`Listening to port ${PORT} ✅`);
   try {
