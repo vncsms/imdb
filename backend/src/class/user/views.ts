@@ -1,6 +1,6 @@
 import Response from '../response/model';
 import { userField, uniqueUserSerializer } from './serializers';
-import { checkUsername } from './check';
+import { checkUsername, checkPassword } from './check';
 import { verifyaccount } from './db';
 
 export function registertUser(req: Record<string, any>): Response {
@@ -26,11 +26,12 @@ export function registertUser(req: Record<string, any>): Response {
   if (!('password' in req)) {
     errors.password = 'Password is required';
     error = true;
-  }
-
-  if (!('name' in req)) {
-    errors.name = 'Name is required';
-    error = true;
+  } else {
+    const resp = checkPassword(req.password);
+    if (resp.status !== 200) {
+      error = true;
+      errors.password = resp.body.detail;
+    }
   }
 
   if (!('email' in req)) {

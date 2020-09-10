@@ -5,10 +5,6 @@ import { getInsecureSHA1ofJSON } from '../base/utils';
 export default class UserModel extends UGCModel {
   username: string;
 
-  name: string;
-
-  lastname: string;
-
   email: string;
 
   password: string;
@@ -18,8 +14,6 @@ export default class UserModel extends UGCModel {
   constructor() {
     super();
     this.username = '';
-    this.name = '';
-    this.lastname = '';
     this.email = '';
     this.password = '';
     this.token = '';
