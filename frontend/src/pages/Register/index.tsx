@@ -16,7 +16,11 @@ const Register: React.FC = () => {
     repassword: string;
   };
   const { register, handleSubmit  } = useForm<PersonScore>();
-  const [errors, setErrors] = useState();
+  const [errors, setErrors] = useState({
+    username: undefined,
+    email: undefined,
+    password: undefined
+  });
 
   const onSubmit = (data: PersonScore) => {
     registerUser(data).then((data: any) => {
@@ -34,17 +38,26 @@ const Register: React.FC = () => {
           <div>
             <InputContainer>
               Username:
-              <input type="text" ref={register} name="username" />
+              <input type="text"
+                     style={{borderColor: errors.username ? 'red' : 'white',
+                             borderWidth: errors.username ? 1 : 0}}
+                     ref={register} name="username" />
             </InputContainer>
             <InputContainer>
               Password:
-              <input type="text" ref={register} name="password" />
+              <input type="text"
+                     style={{borderColor: errors.password ? 'red' : 'white',
+                     borderWidth: errors.password ? 1 : 0}}
+                     ref={register} name="password" />
             </InputContainer>
           </div>
           <div>
             <InputContainer>
               Email:
-              <input type="text" ref={register} name="email" />
+              <input type="text"
+                     style={{borderColor: errors.email ? 'red' : 'white',
+                     borderWidth: errors.email ? 1 : 0}}
+                     ref={register} name="email" />
             </InputContainer>
             <InputContainer>
               Confirm:
